@@ -1,0 +1,25 @@
+{
+  "name": "explore-angular",
+  "version": "1.0.0",
+  "description": "Small application for demonstrating angular features",
+  "main": "./dist/bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SonofNun15/explore-angular.git"
+  },
+  "keywords": [
+    "angular",
+    "explore",
+    "demonstration",
+    "tutorial"
+  ],
+  "author": "Josh Graber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SonofNun15/explore-angular/issues"
+  },
+  "homepage": "https://github.com/SonofNun15/explore-angular/issues#readme"
+}
