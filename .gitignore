@@ -1,2 +1,5 @@
+# Output folders
+/dist/
+
 # Node modules
 /node_modules/
