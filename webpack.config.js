@@ -6,4 +6,7 @@ module.exports = {
 		path: path.resolve('dist'),
 		filename: 'bundle.js',
 	},
+	externals: {
+		'angular': 'angular',
+	},
 };
