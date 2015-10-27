@@ -29,7 +29,7 @@ describe('calculator', function() {
 		var result = calculator.calculate('*', 5, 3);
 		expect(result).to.equal(15);
 
-		var result = calculator.calculate('x', 10, 3);
+		result = calculator.calculate('x', 10, 3);
 		expect(result).to.equal(30);
 	});
 
