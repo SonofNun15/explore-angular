@@ -2,10 +2,12 @@
 
 var angular = require('angular');
 
-var helloWorldModule = require('./helloWorld/helloWorld.controller');
+var behaviorsModule = require('./behaviors/behaviors.module');
+var controllersModule = require('./controllers/controllers.module');
 
 exports.moduleName = 'exp-ang';
 
 angular.module(exports.moduleName, [
-	helloWorldModule.moduleName,
+	behaviorsModule.moduleName,
+	controllersModule.moduleName,
 ]);
