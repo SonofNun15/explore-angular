@@ -17,8 +17,14 @@ function EventConsumerController($scope) {
 			oldSubscription.dispose();
 		}
 
-		oldSubscription = newValue.subscribe(function(data) {
-			$scope.$apply(function() { self.hitCount++; });
+		var xCoordStream = newValue.map(function(event) {
+			return {
+				position: event.offsetX,
+			};
+		}).sample(1000 /*ms*/);
+
+		oldSubscription = xCoordStream.subscribe(function(data) {
+			$scope.$apply(function() { self.hitCount++; self.xPos = data.position; });
 		}, function(error) {
 			$scope.$apply(function() { self.error = error; });
 		}, function() {
