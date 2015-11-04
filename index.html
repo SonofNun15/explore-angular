@@ -4,9 +4,23 @@
 		<title>Exploring Angular</title>
 	</head>
 	<body ng-app="exp-ang">
-		<header ng-controller="HelloWorldController as helloWorld">
-			<h1>{{helloWorld.message}}</h1>
-		</header>
+		<div style="width: 500px; height: 300px; background-color: lightgray;" ea-mouse-over="eventStream">
+			<p>Mouse over to increment count</p>
+		</div>
+		<div ng-controller="EventConsumerController as controller">
+			<div>
+				<label>Hit count: </label>
+				<span>{{controller.hitCount}}</span>
+			</div>
+			<div>
+				<label>Error: </label>
+				<span>{{controller.error}}</span>
+			</div>
+			<div>
+				<label>Finished: </label>
+				<span>{{controller.finished}}</span>
+			</div>
+		</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
 		<script src="/dist/bundle.js"></script>
