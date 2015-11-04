@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/SonofNun15/explore-angular/issues#readme",
   "dependencies": {
-    "angular": "^1.4.7"
+    "angular": "^1.4.7",
+    "rx": "^4.0.6"
   }
 }
