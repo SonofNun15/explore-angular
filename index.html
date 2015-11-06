@@ -44,6 +44,21 @@
 				<button ng-click="controller.finishCustom()">Finish</button>
 				<button ng-click="controller.generateCustomError()">Error</button>
 			</div>
+			<div>
+				<h3>Array consumer</h3>
+				<div>
+					<label>Current value: </label>
+					<span>{{controller.arrayCurrentValue}}</span>
+				</div>
+				<div>
+					<label>Finished: </label>
+					<span>{{controller.arrayFinished}}</span>
+				</div>
+				<div>
+					<label>Error: </label>
+					<span>{{controller.arrayError}}</span>
+				</div>
+			</div>
 		</div>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>

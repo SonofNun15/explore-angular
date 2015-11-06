@@ -1,13 +1,16 @@
 'use strict';
 
 var angular = require('angular');
+var Rx = require('rx');
+
 var customStream = require('../../services/customStream/customStream.service');
+var arraySource = require('../../services/arraySource/arraySource.service');
 
 exports.moduleName = 'exp-ang.controllers.eventConsumer';
 exports.controllerName = 'EventConsumerController';
 
-EventConsumerController.$inject = ['$scope', customStream.serviceName];
-function EventConsumerController($scope, customStream) {
+EventConsumerController.$inject = ['$scope', customStream.serviceName, arraySource.serviceName];
+function EventConsumerController($scope, customStream, arraySource) {
 	var self = this;
 
 	// --- public interface ---
@@ -25,9 +28,15 @@ function EventConsumerController($scope, customStream) {
 	self.finishCustom = customStream.end;
 	self.generateCustomError = customStream.error;
 
+	// Array
+	self.arrayCurrentValue = null;
+	self.arrayFinished = false;
+	self.arrayError = null;
+
 	// --- initialize ---
 	consumeEventStream();
 	consumeCustomStream();
+	consumeArrayStream();
 
 	function consumeEventStream() {
 		var oldSubscription;
@@ -56,7 +65,6 @@ function EventConsumerController($scope, customStream) {
 	}
 
 	function consumeCustomStream() {
-		// Use controlled() to cause stream to only supply values on request
 		var customSourceStream = customStream.get();
 
 		customSourceStream.subscribe(function(value) {
@@ -69,7 +77,28 @@ function EventConsumerController($scope, customStream) {
 			self.customFinished = true;
 		});
 	}
+
+	function consumeArrayStream() {
+		// Use controlled() to cause stream to only supply values on request
+		var controlledArraySource = arraySource.get().controlled();
+		var pullData;
+
+		// Display each value from the stream
+		controlledArraySource.subscribe(function(value) {
+			self.arrayCurrentValue = value;
+		}, function(error) {
+			self.arrayError = error;
+		}, function() {
+			self.arrayFinished = true;
+			pullData.dispose();
+		});
+
+		// Request values at regular intervals
+		pullData = Rx.Observable.interval(1000).subscribe(function() {
+			$scope.$apply(function() { controlledArraySource.request(1); });
+		});
+	}
 }
 
-angular.module(exports.moduleName, [customStream.moduleName])
+angular.module(exports.moduleName, [customStream.moduleName, arraySource.moduleName])
 	.controller(exports.controllerName, EventConsumerController);
