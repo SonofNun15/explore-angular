@@ -8,29 +8,34 @@ exports.controllerName = 'EventConsumerController';
 EventConsumerController.$inject = ['$scope'];
 function EventConsumerController($scope) {
 	var self = this;
-	var oldSubscription;
 
-	self.hitCount = 0;
+	consumeEventStream();
 
-	$scope.$watch('eventStream', function(newValue) {
-		if (oldSubscription) {
-			oldSubscription.dispose();
-		}
+	function consumeEventStream() {
+		var oldSubscription;
 
-		var xCoordStream = newValue.map(function(event) {
-			return {
-				position: event.offsetX,
-			};
-		}).sample(1000 /*ms*/);
+		self.hitCount = 0;
 
-		oldSubscription = xCoordStream.subscribe(function(data) {
-			$scope.$apply(function() { self.hitCount++; self.xPos = data.position; });
-		}, function(error) {
-			$scope.$apply(function() { self.error = error; });
-		}, function() {
-			$scope.$apply(function() { self.finished = true; });
+		$scope.$watch('eventStream', function(newValue) {
+			if (oldSubscription) {
+				oldSubscription.dispose();
+			}
+
+			var xCoordStream = newValue.map(function(event) {
+				return {
+					position: event.offsetX,
+				};
+			}).sample(1000 /*ms*/);
+
+			oldSubscription = xCoordStream.subscribe(function(data) {
+				$scope.$apply(function() { self.hitCount++; self.xPos = data.position; });
+			}, function(error) {
+				$scope.$apply(function() { self.error = error; });
+			}, function() {
+				$scope.$apply(function() { self.finished = true; });
+			});
 		});
-	});
+	}
 }
 
 angular.module(exports.moduleName, [])
