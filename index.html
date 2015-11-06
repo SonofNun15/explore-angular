@@ -9,20 +9,40 @@
 		</div>
 		<div ng-controller="EventConsumerController as controller">
 			<div>
-				<label>Hit count: </label>
-				<span>{{controller.hitCount}}</span>
+				<h3>Event consumer</h3>
+				<div>
+					<label>Hit count: </label>
+					<span>{{controller.hitCount}}</span>
+				</div>
+				<div>
+					<label>X pos: </label>
+					<span>{{controller.xPos}}</span>
+				</div>
+				<div>
+					<label>Finished: </label>
+					<span>{{controller.finished}}</span>
+				</div>
+				<div>
+					<label>Error: </label>
+					<span>{{controller.eventError}}</span>
+				</div>
 			</div>
 			<div>
-				<label>X pos: </label>
-				<span>{{controller.xPos}}</span>
-			</div>
-			<div>
-				<label>Error: </label>
-				<span>{{controller.error}}</span>
-			</div>
-			<div>
-				<label>Finished: </label>
-				<span>{{controller.finished}}</span>
+				<h3>Custom consumer</h3>
+				<div>
+					<label>Current value: </label>
+					<span>{{controller.currentCustomValue}}</span>
+				</div>
+				<div>
+					<label>Finished: </label>
+					<span>{{controller.customFinished}}</span>
+				</div>
+				<div>
+					<label>Error: </label>
+					<span>{{controller.customError}}</span>
+				</div>
+				<button ng-click="controller.finishCustom()">Finish</button>
+				<button ng-click="controller.generateCustomError()">Error</button>
 			</div>
 		</div>
 
