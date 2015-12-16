@@ -13,7 +13,7 @@ module.exports = function(karma) {
 
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: ['mocha', 'chai'],
+		frameworks: ['mocha', 'chai', 'sinon'],
 
         // enable / disable watching file and executing tests whenever any file changes
 		autoWatch: false,
@@ -41,6 +41,7 @@ module.exports = function(karma) {
 		port: 2000,
 
 		plugins: [
+			'karma-sinon',
 			'karma-mocha',
 			'karma-chai',
 			'karma-webpack',
